@@ -1,4 +1,13 @@
 name = "TTVFaster"
-uuid = "c19f3b60-c4d8-47dc-bedd-be241638db42"
-authors = ["[bmlindor] <blindor@uw.edu>"]
+uuid = "d84f081e-b698-44a3-a477-911041168508"
+authors = ["ericagol", "bmlindor"]
 version = "0.1.0"
+
+[compat]
+julia = "1.3"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

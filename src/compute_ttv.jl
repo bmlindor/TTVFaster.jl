@@ -2,16 +2,9 @@
 # in eccentricity.  Please cite Agol & Deck (2015) if
 # you make use of this in published research.
 
-# module TTVFaster
-
-# # VERSION < v"0.4-dev" && using Docile
-
-# export Planet_plane_hk, compute_ttv!
-# export Planet_plane                   # Deprecated, only exported to make the error message work
-
 include("ttv_succinct.jl")
 
-struct Planet_plane
+struct Planet_plane # Deprecated, only exported to make the error message work
   mass_ratio :: Float64
   period   :: Float64
   trans0   :: Float64
@@ -29,7 +22,6 @@ struct Planet_plane_hk{T<:Real} # Parameters of a planet in a plane-parallel sys
   ecosw    :: T
   esinw    :: T
 end
-
 
 # """
 # # Error message to explain to anyone who tries to use the old version
@@ -57,15 +49,15 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk{T},p2::Planet_plane_hk{T
 
   # Compute the semi-major axis ratio of the planets:
   # println(p1.period,p2.period)
-  global alpha = (p1.period/p2.period)^(2//3)  #check memory allocation >>>>>>>>>>>>
+  alpha = (p1.period/p2.period)^(2//3)  
   #println(alpha, p1.period, p2.period)
   @assert(alpha < 1)
   @assert(alpha > 0)
   # Number of times:
    ntime1 = length(time1)
    ntime2 = length(time2)
-  f1=zeros(T,jmax+2,5)  #check memory allocation >>>>>>>>>>>>
-  f2=zeros(T,jmax+2,5)  #check memory allocation >>>>>>>>>>>>
+  f1=zeros(T,jmax+2,5)  
+  f2=zeros(T,jmax+2,5)  
   # Compute the coefficients:
   ttv_succinct!(jmax+1,alpha,f1,f2)  # I need to compute coefficients one higher than jmax
   # Compute TTVs for inner planet (equation 33):
@@ -76,7 +68,6 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk{T},p2::Planet_plane_hk{T
   sin2om=p2.esinw/e2
   cos1om=p1.ecosw/e1
   cos2om=p2.ecosw/e2
-
   # Compute mean motions:
   n1=2pi/p1.period
   n2=2pi/p2.period
@@ -147,7 +138,6 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk{T},p2::Planet_plane_hk{T
     ttv2[i] = ttv2[i]*p2.period*p1.mass_ratio/(2pi)
   end
   # Finished! 
-  #ttv1,ttv2 are already allocated
   return 
 end  # compute_ttv!
-# end # module
+
