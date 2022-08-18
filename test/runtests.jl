@@ -11,5 +11,5 @@ end
 
 @testset "TTVFaster.jl" begin
     # @time ttv1,ttv2=test_ttv(5,40,20,data[1:10]);
-    @test run_test() != 0
+    @test run_test() != 0.0
 end
