@@ -1,5 +1,4 @@
 # Computes TTVs with TTVFaster for N planets with pairwise TTV calculation.
-
 include("compute_ttv.jl")
 
 function ttv_nplanet(nplanet::Int64,jmax::Int64,ntrans::Vector{Int64},params::Vector{T}) where T<:Real

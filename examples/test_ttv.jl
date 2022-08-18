@@ -2,7 +2,7 @@
 # compute_ttv.jl.  Please cite Agol & Deck (2015) if
 # you make use of this in your research.
 
-include("compute_ttv.jl")
+include("../src/TTVFaster.jl")
 #include("laplace_coefficients_initialize.jl")
 
 function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector{Float64}, WriteOutput::Bool = true, num_evals::Integer = 1, profile::Bool = false) 
@@ -32,7 +32,7 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector{Float64}, W
   hashsum = 0
   for i in 1:num_evals
    # Call the compute_ttv code which implements equation (33)
-   TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2)#,f1,f2,b,alpha0,b0)
+    TTVFaster.compute_ttv!(jmax,p1,p2,time1,time2,ttv1,ttv2)#,f1,f2,b,alpha0,b0)
     if profile
       hashsum += hash(ttv1)+hash(ttv2)
     end
@@ -43,8 +43,8 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector{Float64}, W
 
   if WriteOutput
     # Write the mean ephemeris and TTV results to two files:
-    writedlm("inner_ttv.txt",[time1 ttv1])
-    writedlm("outer_ttv.txt",[time2 ttv2])
+    writedlm("../examples/inner_ttv.txt",[time1 ttv1])
+    writedlm("../examples/outer_ttv.txt",[time2 ttv2])
   end
   return ttv1,ttv2
 end

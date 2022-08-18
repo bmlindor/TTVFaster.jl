@@ -6,7 +6,7 @@ Computes first order eccentricity transit timing variations (TTVs) with respect 
 
 module TTVFaster
 
-include("ttv_nplanet.jl")
+include("laplace_coefficients_initialize.jl")
 include("ttv_wrapper.jl")
 
 export Planet_plane_hk, ttv_wrapper, compute_ttv!
