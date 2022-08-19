@@ -1,7 +1,5 @@
 # TTVFaster
 First order eccentricity transit timing variations (TTVs) computed in Agol &amp; Deck (2015)
-
-**Reference to cite**
 [![ADS](https://img.shields.io/badge/ADS-2016APJ...818...177A-blue)](https://ui.adsabs.harvard.edu/abs/2016ApJ...818..177A/abstract) | [![arXiv](https://img.shields.io/badge/arXiv-1509.01623-brightgreen)](http://arxiv.org/abs/1509.01623)
 
 This implements equation (33) from that paper by computing the Laplace
@@ -10,7 +8,7 @@ the f_{1,j}^{(+-k)} coefficients given in equation (34) using the functions u an
 v_+- with coefficients given in Table 1.
 
 ## Installation
-You can install the registered TTVFaster repo as a Julia package with the manager `Pkg`.
+You can install the registered TTVFaster repo as a Julia package with the `Pkg` manager.
 - the repo from the package registry has been tested on Julia v1.3.0  
 ```julia
 julia> using Pkg Pkg.add("TTVFaster.jl")
@@ -27,7 +25,7 @@ TTVFaster computes TTVs with respect to 5 properties for each planet: \mu,t0,Per
 Period is the mean orbital period, e is the eccentricity, and omega is the longitude of periastron. 
 
 ### Example
-The examples/ directory contains the file kepler62ef_planets.txt, 
+The file kepler62ef_planets.txt in the examples/ directory contains
 a comma-separated set of 10 parameters that describe a system with two planets similar to Kepler-62e/f. 
 
 ``` julia
