@@ -1,6 +1,6 @@
 # TTVFaster
 First order eccentricity transit timing variations (TTVs) computed in Agol &amp; Deck (2015)
-[![ADS](https://img.shields.io/badge/ADS-2016APJ...818...177A-blue)](https://ui.adsabs.harvard.edu/abs/2016ApJ...818..177A/abstract) | [![arXiv](https://img.shields.io/badge/arXiv-1509.01623-brightgreen)](http://arxiv.org/abs/1509.01623)
+[![ADS](https://img.shields.io/badge/ADS-2016APJ...818...177A-blue)](https://ui.adsabs.harvard.edu/abs/2016ApJ...818..177A/abstract) [![arXiv](https://img.shields.io/badge/arXiv-1509.01623-brightgreen)](http://arxiv.org/abs/1509.01623)
 
 This implements equation (33) from that paper by computing the Laplace
 coefficients using a series solution due to Jack Wisdom, computing
