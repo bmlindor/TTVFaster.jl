@@ -34,11 +34,11 @@ end
 # - `ntrans::Vector{Int64}`: number of transits of each planet in model
 # - `params::Vector{Real}`: vector of values for 5 elements of each planet: mass_ratio,period,trans0,ecosw,esinw 
 # - `jmax::Int64`: 
-# - `treat_earth_moon_as_planet::Bool`: whether to treat the Earth-Moon barycenter as 
-# a planet (such that the second planet had no moon)
+# - `treat_PMB_as_planet::Bool`: whether to treat the Planet-Moon Barycenter as 
+# an observed planet for p2 (i.e. case where Earth has no Moon)
 # # Returns:
 # -The model transit times for the observed planets with model TTVs for the system.
-function ttv_wrapper(tt0::Vector{Float64},nplanet::Int64,ntrans::Vector{Int64},params::Vector{T},jmax::Integer,treat_earth_moon_as_planet::Bool) where T<:Real
+function ttv_wrapper(tt0::Vector{Float64},nplanet::Int64,ntrans::Vector{Int64},params::Vector{T},jmax::Integer,treat_PMB_as_planet::Bool) where T<:Real
   # If transit times of additional planets were observable these would need to be added in.
   n1,n2 = ntrans[1:2]
   # println(n1, " ", n2)
@@ -56,7 +56,7 @@ function ttv_wrapper(tt0::Vector{Float64},nplanet::Int64,ntrans::Vector{Int64},p
   per2 = params[7]
   tt2 = collect(range(t02,stop = t02+per2*(n2-1),length = n2)) 
   for i=1:n2
-    if treat_earth_moon_as_planet
+    if treat_PMB_as_planet
       tt2[i] += ttv[2,i]
     else
       # Compute the amplitude of Moon perturbing Earth's transit times:
@@ -68,10 +68,10 @@ function ttv_wrapper(tt0::Vector{Float64},nplanet::Int64,ntrans::Vector{Int64},p
   end
   return [tt1;tt2]  
 end
-# function chisquare(tt0,nplanet,ntrans,params,tt,sigtt,jmax,treat_earth_moon_as_planet)
+# function chisquare(tt0,nplanet,ntrans,params,tt,sigtt,jmax,treat_PMB_as_planet)
 #   chisq = 0.0  #check mearth_moon_as_planetory allocation >>>>>>>>>>>>
 #   # println(params,tt[1],sigtt[1])
-#   tt_model = ttv_wrapper(tt0,nplanet,ntrans,params,jmax,treat_earth_moon_as_planet) #,fixp3,p3_cur)
+#   tt_model = ttv_wrapper(tt0,nplanet,ntrans,params,jmax,treat_PMB_as_planet) #,fixp3,p3_cur)
 #   for j=1:length(tt)
 #     chisq += (tt[j]-tt_model[j])^2/sigtt[j]^2
 #   end
