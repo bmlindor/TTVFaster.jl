@@ -1,8 +1,8 @@
+include("ttv_succinct.jl")
 """
 Computes transit timing variations to linear order in eccentricity for non-resonant, plane-parallel planets.
 Please cite Agol & Deck (2015) if you make use of this in published research.
 """
-include("ttv_succinct.jl")
 
 struct Planet_plane # Deprecated, only exported to make the error message work
   mass_ratio :: Float64
