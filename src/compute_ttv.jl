@@ -1,7 +1,7 @@
-# Computes transit timing variations to linear order
-# in eccentricity.  Please cite Agol & Deck (2015) if
-# you make use of this in published research.
-
+"""
+Computes transit timing variations to linear order in eccentricity for non-resonant, plane-parallel planets.
+Please cite Agol & Deck (2015) if you make use of this in published research.
+"""
 include("ttv_succinct.jl")
 
 struct Planet_plane # Deprecated, only exported to make the error message work
@@ -23,27 +23,21 @@ struct Planet_plane_hk{T<:Real} # Parameters of a planet in a plane-parallel sys
   esinw    :: T
 end
 
-# """
-# # Error message to explain to anyone who tries to use the old version
-# """
-function compute_ttv!(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector)
-  error("The Planet_plane data structure has been deprecated in favor of Planet_plane_hk")
-end
+"""
+compute_ttv(jmax,p1,p2,time1,time2,ttv1,ttv2)
 
-# """
-# # Computes transit-timing variations to linear order in
-# # eccentricity for non-resonant, plane-parallel planets.
-# # Input:
-# #   jmax:  Maximum j over which to sum the TTV calculation for both planets
-# #     p1:  Planet type for inner planet
-# #     p2:  Planet type for outer planet
-# #  time1:  Transit times for inner planet
-# #  time2:  Transit times for outer planet
-# #
-# # Output:
-# #   ttv1: TTVs of the inner planet
-# #   ttv2: TTVs of the outer planet
-# """
+Arguments:
+  jmax:  Maximum j over which to sum the TTV calculation for both planets
+  p1:    Planet type for inner planet
+  p2:    Planet type for outer planet
+  time1: Transit times for inner planet
+  time2: Transit times for outer planet
+  ttv1:  Container for TTVs of the inner planet
+  ttv2:  Container for TTVs of the outer planet
+Outputs: 
+  ttv1
+  ttv2
+"""
 
 function compute_ttv!(jmax::Integer,p1::Planet_plane_hk{T},p2::Planet_plane_hk{T},time1::Vector{T},time2::Vector{T},ttv1::Vector{T},ttv2::Vector{T}) where T<:Real
 
@@ -141,3 +135,7 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk{T},p2::Planet_plane_hk{T
   return 
 end  # compute_ttv!
 
+function compute_ttv!(jmax::Integer,p1::Planet_plane,p2::Planet_plane,time1::Vector,time2::Vector,ttv1::Vector,ttv2::Vector)
+  # Error message to explain to anyone who tries to use the old version
+  error("The Planet_plane data structure has been deprecated in favor of Planet_plane_hk")
+end

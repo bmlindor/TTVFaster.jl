@@ -1,5 +1,17 @@
-# Computes TTVs with TTVFaster for N planets with pairwise TTV calculation.
 include("compute_ttv.jl")
+"""
+ttv_nplanet(nplanet,jmax,ntrans,params)
+
+Computes TTVs with TTVFaster for N planets with pairwise TTV calculation.
+
+Arguments:
+  nplanet: Number of planets
+  jmax:    Maximum j over which to sum the TTV calculation
+  ntrans:  Number of transits for each planet
+  params:  Parameters of each planet 
+Returns:
+  ttvs:    Computed transit timing variations for the transiting planets.
+"""
 
 function ttv_nplanet(nplanet::Int64,jmax::Int64,ntrans::Vector{Int64},params::Vector{T}) where T<:Real
   # Need at least two planets!
@@ -8,11 +20,10 @@ function ttv_nplanet(nplanet::Int64,jmax::Int64,ntrans::Vector{Int64},params::Ve
   @assert(length(ntrans)==nplanet)
   # Define type of ttv array:
   ttv_el_type = eltype(params) == Float64 ? Float64 : Number
-  # Need to create an array to store TTVs with maximum length equal to maximum number
-  # of transit times of any planet:
+  # Need to create an array to store TTVs with maximum length equal to maximum number of transit times of any planet:
   ntransmax = maximum(ntrans)
   ttv = zeros(T,nplanet,ntransmax) 
-  # Each planet requires 5 elements in params: mass_ratio,period,trans0,ecosw,esinw:
+  # Each planet requires 5 elements in params (mass_ratio,period,trans0,ecosw,esinw):
   @assert(length(params)==5*nplanet)
   @assert(jmax>=1)  
   for iplanet=1:nplanet
