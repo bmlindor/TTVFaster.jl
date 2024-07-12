@@ -5,7 +5,7 @@
 # include("../src/TTVFaster.jl")
 # include("laplace_coefficients_initialize.jl")
 
-function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64}, WriteOutput::Bool = true, num_evals::Integer = 1, profile::Bool = false) 
+function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64}; WriteOutput::Bool = true, num_evals::Integer = 1, profile::Bool = false) 
   @assert(jmax>=1)  # Should there be a larger minimum?
   @assert(n1>2)
   @assert(n2>2)
@@ -43,8 +43,8 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Array{Float64}, Wr
 
   if WriteOutput
     # Write the mean ephemeris and TTV results to two files:
-    writedlm("examples/inner_ttv.txt",[time1 ttv1])
-    writedlm("examples/outer_ttv.txt",[time2 ttv2])
+    writedlm("inner_ttv.txt",[time1 ttv1])
+    writedlm("outer_ttv.txt",[time2 ttv2])
   end
   return ttv1,ttv2
 end
