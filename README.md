@@ -11,13 +11,13 @@ $v_{\pm}$ with coefficients given in Table 1.
 You can install the registered TTVFaster repo as a Julia package with the `Pkg` manager.
 - the repo from the package registry has been tested on Julia v1.6.0  
 ```julia
-julia> using Pkg Pkg.add("TTVFaster.jl")
+using Pkg; Pkg.add("TTVFaster.jl")
 ```
 In its current state, the package computes the TTVs of a multi-transiting planetary system where at least 2 planets are observed to be transiting. 
 If you intend to modify the source code for any reason, please create a GitHub fork to develop your own version. 
 - make sure to replace `your-GitHub-username` with your actual GitHub username in the code below
 ```julia
-julia> Pkg.develop(PackageSpec(url="git@github.com:your-GitHub-username/TTVFaster.jl.git"))
+Pkg.develop(PackageSpec(url="git@github.com:your-GitHub-username/TTVFaster.jl.git"))
 ```
 ## Usage
 TTVFaster computes TTVs with respect to 5 properties for each planet: $\mu$, $T_0$ , $P$, $e \cos(\omega)$ , $e \sin(\omega)$;
@@ -29,19 +29,14 @@ The file kepler62ef_planets.txt in the examples/ directory contains
 a comma-separated set of 10 parameters that describe a system with two planets similar to Kepler-62e/f. 
 
 ``` julia
-julia> using TTVFaster,DelimitedFiles
+using TTVFaster,DelimitedFiles
 
-julia> data=readdlm("kepler62ef_planets.txt",',',Float64)  
-1x10 Array{Float64,2}:
- 3.02306e-5  122.386  -16.5926  -0.00127324  0.0026446  1.67874e-5  267.307  155.466  -0.0025544  0.00117917
+data=readdlm("kepler62ef_planets.txt",',',Float64)  
 
-julia> include("test_ttv.jl")  
-test_ttv (generic function with 4 methods)
+include("test_ttv.jl")  
 
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  # inputs are jmax,ntrans1,ntrans2,data
-  0.982326 seconds (2.04 M allocations: 98.466 MiB, 12.08% gc time)
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
-  0.001171 seconds (331 allocations: 21.922 KiB)
+@time ttv1,ttv2=test_ttv(5,40,20,data);  # inputs are jmax,ntrans1,ntrans2,data
+@time ttv1,ttv2=test_ttv(5,40,20,data);  
 ```
 
 This computes the TTVs and writes them to the files inner_ttv.txt and outer_ttv.txt in the examples/ directory.
